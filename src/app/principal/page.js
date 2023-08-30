@@ -3,6 +3,7 @@ const P = new Pokedex();
 import Nav from '../componente/nav';
 
 export default function principal () {
+
   return (
     <>
     
