@@ -5,7 +5,7 @@ export default function header () {
   return (
     
     <nav className=' bg-slate-100 p-2'>
-      <img src='./contenido/logo.png' className=' w-80 h-28'></img>
+      <img src='./contenido/logo.png' className=' scale-75 md:scale-100'></img> 
 
     </nav>
 
