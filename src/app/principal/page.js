@@ -1,24 +1,23 @@
-import Pokedex from 'pokedex-promise-v2';
-const P = new Pokedex();
+import MostrarPokedex from '../componente/MostrarPokedex';
+import MostrarPokedex2 from '../componente/MostrarPokedex2';
 import Nav from '../componente/nav';
 
-import mostrarPokedex from '../componente/pokedex';
-
-export default function principal () {
-
+export default function Principal() {
   return (
     <>
     
     <Nav/>
 
-    <div id='listaPokemon'>
+    <div id='hola'>
     
+      <MostrarPokedex2/>
+      
     </div>
     
 
 
 
-    <script src='../componente/pokedex'></script>
+    
     </>
   )
 }
