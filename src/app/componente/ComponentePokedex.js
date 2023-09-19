@@ -1,8 +1,9 @@
 'use client'// indica que estas utilizando un componente desde el lado del cliente
 import React, { useEffect, useState } from "react";// importo 2 hooks 
 import axios from "axios"; //importo axios y se utiliza para realizar solicitudes https
+import { useRouter } from "next/navigation"; // importo useRouter desde next/navigation, navigation es nuevo ya que router fue borrado
 
-export default function mostrarPokedex() {
+const mostrarPokedex = () => {
   const [pokemonList, setPokemonList] = useState([]); // declaro las listas de pokemon como un areglo vacio
   const [selectedCategory, setSelectedCategory] = useState(""); // declaro las categorias de cada pokemon como un string
   const [searchTerm, setSearchTerm] = useState(""); // declaro el termino de busqueda como un string
@@ -13,12 +14,9 @@ export default function mostrarPokedex() {
 
   const cantidadPaginas = pokemonList.length / porPagina; // defino la cantidad de paginas que tendremos dividiendo el tamaño de la lista entre la cantidad de pokemon por pagina
   
-  
+  const router = useRouter(); // creo el componente router el cual utilizare para router todo
 
   
-
-
-
 
   useEffect(() => {
     //realizo una solicitud get a la api de pokemon para obtener los datos de los 151 pokemon
@@ -77,6 +75,14 @@ export default function mostrarPokedex() {
   const paginatedPokemonList = searchFilteredPokemonList.slice(startIndex, endIndex); // Obtiene la lista de Pokémon para la página actual "averigua como funciona slice"
   //slice lo que hace es recorrer un arreglo desde un punto de inicio hasta un punto final, por eso le pasamos el start que seria donde inicia esa pagina y el end donde termina
 
+  /*const handlePageChange = () =>{
+    
+    //const pokemonid = pokemonList.
+
+    router.push(`/pokemon`);
+
+  }*/
+
   return (
     <>
        {/* Agrega el selector de categorías */}
@@ -118,7 +124,8 @@ export default function mostrarPokedex() {
       <div className="bg-slate-100 grid grid-cols-3 gap-4 p-8 shadow-inner" >
         {paginatedPokemonList.map((pokemon, index) => (//mapeo toda la lista de pokemon siguiendo el filtro de busqueda por paginacion pero esto no evita que funcionen todos los filtros
           
-          <a className="bg-white rounded-xl shadow-sm shadow-slate-400 p-2" key={pokemon.id} href="#">{/*Crea un div para mostrar los detalles de un Pokémon en particular. Se le da una clase CSS y una clave única (key) para identificación.*/}
+          <div className="bg-white rounded-xl shadow-sm shadow-slate-400 p-2" key={pokemon.id} onClick={() => router.push(`/pokemon?id=${pokemon.id}`)}>{/*Crea un div para mostrar los detalles de un Pokémon en particular. Se le da una clase CSS y una clave única (key) para identificación.
+                                                                                                  el onclick posee el elemento router el cual hace un push a la direccion que deseo a la cual le paso el id del pokemon al que doy click*/}
 
             <div className="flex justify-center">{/* Crea un div para mostrar una imagen del Pokémon. Se utiliza la URL de la imagen desde los detalles del Pokémon */}
               <img
@@ -142,7 +149,7 @@ export default function mostrarPokedex() {
               ))}
               
             </div>
-          </a>
+          </div>
         ))}
       </div>
 
@@ -178,3 +185,5 @@ export default function mostrarPokedex() {
     </>
   );
 }
+
+export default mostrarPokedex;
