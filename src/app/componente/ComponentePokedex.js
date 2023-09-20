@@ -124,7 +124,7 @@ const mostrarPokedex = () => {
       <div className="bg-slate-100 grid grid-cols-3 gap-4 p-8 shadow-inner" >
         {paginatedPokemonList.map((pokemon, index) => (//mapeo toda la lista de pokemon siguiendo el filtro de busqueda por paginacion pero esto no evita que funcionen todos los filtros
           
-          <div className="bg-white rounded-xl shadow-sm shadow-slate-400 p-2" key={pokemon.id} onClick={() => router.push(`/pokemon/${pokemon.id}`)}>{/*Crea un div para mostrar los detalles de un Pokémon en particular. Se le da una clase CSS y una clave única (key) para identificación.
+          <div className="bg-white rounded-xl shadow-sm shadow-slate-400 p-2 hover:cursor-pointer" key={pokemon.id} onClick={() => router.push(`/pokemon/${pokemon.id}`)}>{/*Crea un div para mostrar los detalles de un Pokémon en particular. Se le da una clase CSS y una clave única (key) para identificación.
                                                                                                   el onclick posee el elemento router el cual hace un push a la direccion que deseo a la cual le paso el id del pokemon al que doy click*/}
 
             <div className="flex justify-center">{/* Crea un div para mostrar una imagen del Pokémon. Se utiliza la URL de la imagen desde los detalles del Pokémon */}
@@ -138,12 +138,12 @@ const mostrarPokedex = () => {
               <h3 className="text-black bg-slate-300 rounded-full text-xl font-bold px-3">
                 {pokemon.id}
               </h3>
-              <h3 className="text-black text-xl font-extrabold">{pokemon.name}</h3>
+              <h3 className="text-black text-xl font-extrabold uppercase">{pokemon.name}</h3>
             </div>
 
             <div className="flex flex-row gap-x-3 justify-center py-2">
               {pokemon.categories.map((category, catIndex) => ( //(//mapeo el apartado type del contenido de pokemon y de ahi saco el nombre de su tipo y lo coloco como bg y como label del spam
-                <h3 key={catIndex} className={`text-black bg-${category} rounded-full text-lg font-semibold px-3`}>
+                <h3 key={catIndex} className={`text-black bg-${category} rounded-full text-lg font-semibold px-3 uppercase`}>
                   {category}
                 </h3>
               ))}
