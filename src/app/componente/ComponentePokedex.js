@@ -10,7 +10,7 @@ const mostrarPokedex = () => {
 
   //paginacion
   const [pagina, setPagina] = useState(1); // aqui nos ubicaremos en la pagina que estemos
-  const [porPagina, setPorPagina] = useState(9); // aqui definimos la cantidad de pokemon que mostraremos por pagina
+  const [porPagina, setPorPagina] = useState(15); // aqui definimos la cantidad de pokemon que mostraremos por pagina
 
   const cantidadPaginas = pokemonList.length / porPagina; // defino la cantidad de paginas que tendremos dividiendo el tamaño de la lista entre la cantidad de pokemon por pagina
   
@@ -30,9 +30,9 @@ const mostrarPokedex = () => {
         );
 
         Promise.all(requests) // promise.all hace que el programa espere que se completen todas las solicitudes o promesas
-          .then((responses) => { //aqui manejo la respuesta exitosa de cada solicitud de manera individual, ya que responses es quien contiene todas las solicitudes
-            const pokemonDetails = responses.map((response) => {//mapeo los detalles del pokemon mapeando responses
-              const categories = response.data.types.map(//guardo en una constante llamada categories el mapeo del apartado types de types de cada pokemon
+          .then((responses) => { // aqui manejo la respuesta exitosa de cada solicitud de manera individual, ya que responses es quien contiene todas las solicitudes
+            const pokemonDetails = responses.map((response) => { // mapeo los detalles del pokemon mapeando responses
+              const categories = response.data.types.map( // guardo en una constante llamada categories el mapeo del apartado types de types de cada pokemon
                 (type) => type.type.name // la funcion type devolvera lo que se encuentre en la ubicacion type.type.name
               );
 
@@ -124,7 +124,7 @@ const mostrarPokedex = () => {
       <div className="bg-slate-100 grid grid-cols-3 gap-4 p-8 shadow-inner" >
         {paginatedPokemonList.map((pokemon, index) => (//mapeo toda la lista de pokemon siguiendo el filtro de busqueda por paginacion pero esto no evita que funcionen todos los filtros
           
-          <div className="bg-white rounded-xl shadow-sm shadow-slate-400 p-2" key={pokemon.id} onClick={() => router.push(`/pokemon?id=${pokemon.id}`)}>{/*Crea un div para mostrar los detalles de un Pokémon en particular. Se le da una clase CSS y una clave única (key) para identificación.
+          <div className="bg-white rounded-xl shadow-sm shadow-slate-400 p-2" key={pokemon.id} onClick={() => router.push(`/pokemon/${pokemon.id}`)}>{/*Crea un div para mostrar los detalles de un Pokémon en particular. Se le da una clase CSS y una clave única (key) para identificación.
                                                                                                   el onclick posee el elemento router el cual hace un push a la direccion que deseo a la cual le paso el id del pokemon al que doy click*/}
 
             <div className="flex justify-center">{/* Crea un div para mostrar una imagen del Pokémon. Se utiliza la URL de la imagen desde los detalles del Pokémon */}
@@ -160,7 +160,7 @@ const mostrarPokedex = () => {
         className="bg-slate-300 text-white px-4 py-2 rounded-lg"
         disabled={pagina === 1}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-big-left-filled" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-big-left-filled" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
           <path d="M9.586 4l-6.586 6.586a2 2 0 0 0 0 2.828l6.586 6.586a2 2 0 0 0 2.18 .434l.145 -.068a2 2 0 0 0 1.089 -1.78v-2.586h7a2 2 0 0 0 2 -2v-4l-.005 -.15a2 2 0 0 0 -1.995 -1.85l-7 -.001v-2.585a2 2 0 0 0 -3.414 -1.414z" stroke-width="0" fill="currentColor" />
         </svg>
@@ -175,7 +175,7 @@ const mostrarPokedex = () => {
         className="bg-slate-300 text-white px-4 py-2 rounded-lg"
         disabled={pagina === Math.ceil(cantidadPaginas)}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-big-right-filled" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-big-right-filled" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
           <path d="M12.089 3.634a2 2 0 0 0 -1.089 1.78l-.001 2.586h-6.999a2 2 0 0 0 -2 2v4l.005 .15a2 2 0 0 0 1.995 1.85l6.999 -.001l.001 2.587a2 2 0 0 0 3.414 1.414l6.586 -6.586a2 2 0 0 0 0 -2.828l-6.586 -6.586a2 2 0 0 0 -2.18 -.434l-.145 .068z" stroke-width="0" fill="currentColor" />
         </svg>
