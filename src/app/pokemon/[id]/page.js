@@ -33,24 +33,38 @@ const Pokemon= ({params}) => {
     <>
     
 
-    <div className="bg-slate-100 grid grid-cols-3 gap-4 p-10 shadow-inner" >
+    <div className="bg-slate-100 flex flex-row gap-4 p-10 shadow-inner" >
         
       <div className="bg-white rounded-xl shadow-sm shadow-slate-400 p-4" >{/*Crea un div para mostrar los detalles de un Pokémon en particular. Se le da una clase CSS y una clave única (key) para identificación.*/}
 
         <div className="flex flex-col justify-center">{/* Crea un div para mostrar una imagen del Pokémon. Se utiliza la URL de la imagen desde los detalles del Pokémon */}
-          <h1 className="text-black text-xl font-extrabold text-center uppercase">{DataPokemon.name}</h1>
-          <img src={Img} className="aspect-auto"></img>
+          <div className="flex flex-row justify-center gap-x-3">
 
-          <div className="flex flex-row justify-between">
-
-            {Types.map((types,typeIndex)=>(
-              <h3 key={typeIndex} className="text-black">{types.type.name}</h3>
-            ))}
+            <h1 className="text-black bg-slate-300 rounded-full text-xl font-bold px-3">{DataPokemon.id}</h1>
+            <h1 className="text-black text-xl font-extrabold text-center uppercase">{DataPokemon.name}</h1>
 
           </div>
+          <img src={Img} className="aspect-auto"></img>
+
+          <div className="flex flex-col gap-y-2">
+
+            <h3 className="text-black text-center text-xl font-bold">Types:</h3>
+
+            <div className="flex flex-row justify-evenly">
+
+              {Types.map((types,typeIndex)=>(
+                <h3 key={typeIndex} className="text-black uppercase text-xl font-semibold">{types.type.name}</h3>
+              ))}
+
+            </div>
+
+          </div>
+          
 
         </div>
       </div>
+
+
     </div>
 
 
